@@ -54,7 +54,7 @@ public class NdpaExtension implements QuPathExtension, GitHubProject {
 	 * This allows QuPath to inform the user if it seems to be incompatible.
 	 * TODO: define this
 	 */
-	private static final Version EXTENSION_QUPATH_VERSION = Version.parse("v0.5.0");
+	private static final Version EXTENSION_QUPATH_VERSION = Version.parse("v0.7.0");
 
 	/**
 	 * GitHub repo that your extension can be found at.
