@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import qupath.fx.prefs.controlsfx.PropertyItemBuilder;
 import qupath.lib.common.Version;
 import qupath.lib.gui.QuPathGUI;
-import qupath.lib.gui.extensions.GitHubProject;
 import qupath.lib.gui.extensions.QuPathExtension;
 import qupath.lib.gui.prefs.PathPrefs;
 
@@ -28,7 +27,7 @@ import java.util.ResourceBundle;
  *     /resources/META-INF/services/qupath.lib.gui.extensions.QuPathExtension
  * </pre>
  */
-public class NdpaExtension implements QuPathExtension, GitHubProject {
+public class NdpaExtension implements QuPathExtension {
 	// TODO: add and modify strings to this resource bundle as needed
 	/**
 	 * A resource bundle containing all the text used by the extension. This may be useful for translation to other languages.
@@ -54,17 +53,7 @@ public class NdpaExtension implements QuPathExtension, GitHubProject {
 	 * This allows QuPath to inform the user if it seems to be incompatible.
 	 * TODO: define this
 	 */
-	private static final Version EXTENSION_QUPATH_VERSION = Version.parse("v0.5.0");
-
-	/**
-	 * GitHub repo that your extension can be found at.
-	 * This makes it easier for users to find updates to your extension.
-	 * If you don't want to support this feature, you can remove
-	 * references to GitHubRepo and GitHubProject from your extension.
-	 * TODO: define this
-	 */
-	private static final GitHubRepo EXTENSION_REPOSITORY = GitHubRepo.create(
-			EXTENSION_NAME, "myGitHubUserName", "myGitHubRepo");
+	private static final Version EXTENSION_QUPATH_VERSION = Version.parse("v0.7.0");
 
 	/**
 	 * Flag whether the extension is already installed (might not be needed... but we'll do it anyway)
@@ -165,10 +154,5 @@ public class NdpaExtension implements QuPathExtension, GitHubProject {
 	@Override
 	public Version getQuPathVersion() {
 		return EXTENSION_QUPATH_VERSION;
-	}
-
-	@Override
-	public GitHubRepo getRepository() {
-		return EXTENSION_REPOSITORY;
 	}
 }
