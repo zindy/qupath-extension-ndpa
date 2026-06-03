@@ -167,6 +167,8 @@ public class NdpaTools {
             doc.getDocumentElement().normalize();
         
             NodeList ndpviewstates = doc.getDocumentElement().getChildNodes();
+
+            ArrayList<String> colorClassNames = new ArrayList<String>(); 
         
             for (int i = 0; i < ndpviewstates.getLength(); i++) {
                 Node ndpviewstateNode = ndpviewstates.item(i);
@@ -179,10 +181,16 @@ public class NdpaTools {
                 Element annotationElem = (Element) ndpviewstate.getElementsByTagName("annotation").item(0);
                 String annotationType = annotationElem.getAttribute("type").toUpperCase();
                 String annotationColor = annotationElem.getAttribute("color").toUpperCase();
+                if(!colorClassNames.contains(annotationColor)){
+                    colorClassNames.add(annotationColor);
+                }
+                int annotationR = Integer.parseInt(annotationColor.substring(1, 3), 16);
+                int annotationG = Integer.parseInt(annotationColor.substring(3, 5), 16);
+                int annotationB = Integer.parseInt(annotationColor.substring(5, 7), 16);
                 String details = getTextContent(ndpviewstate, "details");
 
                 ROI roi = null;
-                logger.info("elem: {} {} {} {}", annotationElem, annotationType, annotationName, annotationColor);
+                logger.info("elem: {} {} {} {} ({},{},{})", annotationElem, annotationType, annotationName, annotationColor, annotationR, annotationG, annotationB);
 
                 if ("CIRCLE".equals(annotationType)) {
                     double x = Double.parseDouble(getTextContent(annotationElem,"x"));
@@ -256,6 +264,11 @@ public class NdpaTools {
                     if (annotationClass != null) {
                         annotation.setPathClass(annotationClass);
                     }
+                    else {
+                        annotation.setClassification(annotationColor);
+                    }
+
+                    annotation.setColor(annotationR, annotationG, annotationB); //!!!
 
                     if (details != null && !details.isEmpty()) {
                         annotation.setDescription(details);
